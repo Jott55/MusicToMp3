@@ -2,4 +2,4 @@
 python -m venv .venv
 source .venv/bin/activate
 pip install ffmpeg-python
-python main.py
+.venv/bin/python main.py
