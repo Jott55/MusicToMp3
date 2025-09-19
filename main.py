@@ -12,7 +12,7 @@ out_dir = Path(OUTDIR)
 def main():
     if not music_dir.is_dir():
         os.mkdir(music_dir)
-        print(f"Adicione as musicas nesse <{music_dir.absolute()}> diretorio")
+        print(f"Adicione as musicas nesse <{music_dir.absolute()}> diretorio e tente de novo")
         exit(1)
 
     if len(os.listdir(music_dir)) == 0:

@@ -1,4 +1,8 @@
 #!/bin/bash
 python -m venv .venv
-.venv/bin/pip install ffmpeg-python
-.venv/bin/python main.py
+
+vpython=.venv/bin/python
+vpip=.venv/bin/pip
+
+$vpip install ffmpeg-python
+$vpython main.py
