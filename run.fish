@@ -7,10 +7,14 @@ end
 set vpython .venv/bin/python
 set vpip .venv/bin/pip
 
-if not test ($vpip list | grep -e ffmpeg-python -e kivy)
+function installDependencies
 	echo 'Installing dependencies...'
 	$vpip install ffmpeg-python
 	$vpip install "kivy[base]"
+end
+
+if test -z ($vpip list | grep -e ffmpeg-python); or test "$argv" = "install"
+	installDependencies
 end
 
 $vpython main.py	
