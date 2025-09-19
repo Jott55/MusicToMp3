@@ -1,23 +1,24 @@
 import ffmpeg
 import os
 from pathlib import Path
-
-#Testing out
+from kvgui import Gui
 
 DIR_NAME = 'musicas'
 OUTDIR = 'out'
 
 music_dir = Path(DIR_NAME)
 out_dir = Path(OUTDIR)
-def main():
+
+
+def convert_musics_to_mp3() -> int:
     if not music_dir.is_dir():
         os.mkdir(music_dir)
         print(f"Adicione as musicas nesse <{music_dir.absolute()}> diretorio e tente de novo")
-        exit(1)
+        return 1
 
     if len(os.listdir(music_dir)) == 0:
         print(f"Por favor adicione as musicas") 
-        exit(1)
+        return 2
 
     if not out_dir.is_dir():
         os.mkdir(out_dir)
@@ -33,6 +34,14 @@ def main():
             out = ffmpeg.output(input, f"{os.path.join(out_dir, outputname)}.mp3")
             out = ffmpeg.overwrite_output(out)
             ffmpeg.run(out)
+
+
+
+
+def main() -> int:
+    Gui().run()
+    # res = convert_musics_to_mp3()
+    # return res
 
 
 if __name__ == "__main__":
