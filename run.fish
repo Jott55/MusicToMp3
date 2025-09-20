@@ -10,7 +10,6 @@ set vpip .venv/bin/pip
 function installDependencies
 	echo 'Installing dependencies...'
 	$vpip install ffmpeg-python
-	$vpip install "kivy[base]"
 end
 
 if test -z ($vpip list | grep -e ffmpeg-python); or test "$argv" = "install"

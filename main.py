@@ -1,7 +1,6 @@
 import ffmpeg
 import os
 from pathlib import Path
-from kvgui import Gui
 
 DIR_NAME = 'musicas'
 OUTDIR = 'out'
@@ -39,9 +38,8 @@ def convert_musics_to_mp3() -> int:
 
 
 def main() -> int:
-    Gui().run()
-    # res = convert_musics_to_mp3()
-    # return res
+    res = convert_musics_to_mp3()
+    return res
 
 
 if __name__ == "__main__":
