@@ -6,4 +6,4 @@ execute the run file (only linux, tested in python 3.13.7 | pip 25.2 | ffmpeg-py
 Needs ffmpeg installed
 The fish script is more complete for now
 
-##Testing branch for making the kivy gui
+## Testing branch for making the kivy gui
