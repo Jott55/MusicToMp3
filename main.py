@@ -4,6 +4,10 @@ from pathlib import Path
 
 DIR_NAME = 'musicas'
 OUTDIR = 'out'
+ERROR_CODES=["success", 
+             f"Add musics into {DIR_NAME} and try again.", 
+             "Please add musics.",
+             "wrong file... please try the 'run' script."]
 
 music_dir = Path(DIR_NAME)
 out_dir = Path(OUTDIR)
@@ -12,11 +16,11 @@ out_dir = Path(OUTDIR)
 def convert_musics_to_mp3() -> int:
     if not music_dir.is_dir():
         os.mkdir(music_dir)
-        print(f"Adicione as musicas nesse <{music_dir.absolute()}> diretorio e tente de novo")
+        print(ERROR_CODES[1])
         return 1
 
     if len(os.listdir(music_dir)) == 0:
-        print(f"Por favor adicione as musicas") 
+        print(ERROR_CODES[2]) 
         return 2
 
     if not out_dir.is_dir():
@@ -45,6 +49,6 @@ def main() -> int:
 if __name__ == "__main__":
     main()
 else:
-    print("wrong file")
+    print(ERROR_CODES[4])
     print(__name__)
 
