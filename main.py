@@ -49,6 +49,6 @@ def main() -> int:
 if __name__ == "__main__":
     main()
 else:
-    print(ERROR_CODES[4])
+    print(ERROR_CODES[3])
     print(__name__)
 
