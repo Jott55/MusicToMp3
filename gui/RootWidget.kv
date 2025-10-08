@@ -1,19 +1,21 @@
 <RootWidget>
     canvas:
         Color:
-            rgba: (0.6, 0.7, 1, 1)
+            rgba: (0.1, 0.1, 0.1, 1)
         Rectangle:
             pos: self.pos
             size: self.size
-    BoxLayout:
+    GridLayout:
+        rows: 2
+        pos: root.center
         Button:
             text:"Add Musics"
-            width:100
-            height:50
-            on_release: root.add_music()
+            width: 200
+            height: 100
+            on_release: root.add_music() 
         Button:
             text:"Convert"
-            width:200
-            height:50
+            width: 200
+            height: 100
             on_release: root.convert_music()
         

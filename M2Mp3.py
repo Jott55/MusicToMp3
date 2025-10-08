@@ -12,7 +12,7 @@ class RootWidget(Widget):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.MusicConvert = MusicConvert("en_US")
-
+        
     def add_music(self):
         self.MusicConvert.add_music_dir()
         subprocess.Popen(['xdg-open', Path.cwd().joinpath(self.MusicConvert.music_dir) ])
