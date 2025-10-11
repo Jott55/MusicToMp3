@@ -1,12 +1,8 @@
 from M2Mp3 import MainApp
 from kivy.config import Config
 
-
-
-
 def start_kivy() -> None:
     MainApp().run()
-
 
 def main() -> int:
 
@@ -15,11 +11,9 @@ def main() -> int:
 
     start_kivy()
     return 0
-
-
+  
 if __name__ == "__main__":
     main()
 else:
     print("wrong file")
     print(__name__)
-
