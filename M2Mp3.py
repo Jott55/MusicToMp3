@@ -8,12 +8,24 @@ from pathlib import Path
 
 from convert import MusicConvert
 
+_lang_code = {
+    "button_add_music": "Add Musics",
+    "button_convert_music": "Convert",
+    "button_change_language": "Change language"
+}
+
 class RootWidget(Widget):
     def __init__(self, app, **kwargs):
         super().__init__(**kwargs)
         self.app = app
-        lang = self.app.config.get("general", "language")
-        self.MusicConvert = MusicConvert(lang)
+        self.language_list = ["en_US", "pt_BR"]
+        self.lang = self.app.config.get("general", "language")
+
+        self.lang_code = _lang_code
+        self.set_language_code(self.lang)
+        self.change_gui_language()
+        
+        self.MusicConvert = MusicConvert(self.lang)
         
     def add_music(self):
         self.MusicConvert.add_music_dir()
@@ -35,9 +47,33 @@ class RootWidget(Widget):
     def open_application_settings(self):
         self.app.open_settings()
 
-    def toggle_application_language(self):
-        self.app.set_language("pt_BR")
-        self.MusicConvert.change_language("pt_BR")
+    def toggle_application_language(self):        
+        index = self.language_list.index(self.lang)
+        if (index < len(self.language_list) - 1):
+            self.lang = self.language_list[index+1]
+        else:
+            self.lang = self.language_list[0]
+
+        self.app.set_language(self.lang)
+        self.MusicConvert.set_language(self.lang)
+        
+        self.set_language_code(self.lang)
+        self.change_gui_language()
+
+    def set_language_code(self, lang):
+        if lang == "pt_BR":
+            self.lang_code["button_add_music"] = "Adicionar Musicas"
+            self.lang_code["button_convert_music"] = "Converter"
+            self.lang_code["button_change_language"] = "Portugues Brasileiro"
+        else:
+            self.lang_code["button_add_music"] = "Add Musics"
+            self.lang_code["button_convert_music"] = "Convert"
+            self.lang_code["button_change_language"] = "English USA"
+
+    def change_gui_language(self):
+        self.ids.button_add_music.text = self.lang_code["button_add_music"]
+        self.ids.button_convert_music.text = self.lang_code["button_convert_music"]
+        self.ids.button_change_language.text = self.lang_code["button_change_language"]
 
 class MainApp(App):
 

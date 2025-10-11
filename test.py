@@ -2,11 +2,11 @@ from convert import MusicConvert
 
 mc = MusicConvert("en_US")
 
-print(mc.LANG_CODE)
+print(mc.lang_code)
 
 mc = MusicConvert("pt_BR")
 
-print(mc.LANG_CODE)
+print(mc.lang_code)
 
 
 mc.add_music_dir()

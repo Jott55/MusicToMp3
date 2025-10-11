@@ -19,11 +19,13 @@
             rows: 2
             cols: 2
             Button:
+                id: button_add_music
                 text:"Add Musics"
                 width: 200
                 height: 100
                 on_release: RootWidget.add_music()
             Button:
+                id: button_convert_music
                 text:"Convert"
                 width: 200
                 height: 100
@@ -39,5 +41,6 @@
             Label:
                 text: str(convert_progress_bar.max)
             Button:
+                id: button_change_language
                 text: "Change cli language to portuguese"
                 on_release: RootWidget.toggle_application_language()

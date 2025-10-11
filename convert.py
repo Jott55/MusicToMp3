@@ -2,7 +2,7 @@ from pathlib import Path
 import os
 import subprocess
 
-LANG_CODE = {
+_lang_code = {
     "addMusic": "Add Musics to this directory and try again: ",
     "plsAdd": "Please add musics in the diretory",
     "musicDir": "songs",
@@ -12,35 +12,40 @@ LANG_CODE = {
 
 class MusicConvert():
     def __init__(self, lang = "en_US"):
-        self.change_language(lang)
+        self.lang_code = {}
+        self.set_language(lang)
         
-    def change_language(self, language = "en_US"):
+    def set_language(self, language = "en_US"):
         if (language == "pt_BR"):
-            LANG_CODE["addMusic"] = "Adicione mas musicas no diretorio e tente de novo: "
-            LANG_CODE["plsAdd"] = "Por favor adicione as musicas no diretorio"
-            LANG_CODE["musicDir"] = "musicas"
-            LANG_CODE["outDir"] = "saida"
-            LANG_CODE["directoryAlready"] = "diretorio ja foi criado"
+            self.lang_code["addMusic"] = "Adicione mas musicas no diretorio e tente de novo: "
+            self.lang_code["plsAdd"] = "Por favor adicione as musicas no diretorio"
+            self.lang_code["musicDir"] = "musicas"
+            self.lang_code["outDir"] = "saida"
+            self.lang_code["directoryAlready"] = "diretorio ja foi criado"
+        else:
+            self.lang_code["addMusic"] = "Add Musics to this directory and try again: "
+            self.lang_code["plsAdd"] = "Please add musics in the diretory"
+            self.lang_code["musicDir"] = "songs"
+            self.lang_code["outDir"] = "out"
+            self.lang_code["directoryAlready"] = "Directory already created"
 
-        self.LANG_CODE = LANG_CODE
-
-        self.music_dir = Path(self.LANG_CODE["musicDir"])
-        self.out_dir = Path(self.LANG_CODE["outDir"])
+        self.music_dir = Path(self.lang_code["musicDir"])
+        self.out_dir = Path(self.lang_code["outDir"])
 
     def add_music_dir(self) -> int:
         if not self.music_dir.is_dir():
             os.mkdir(self.music_dir)
-            print(self.LANG_CODE["addMusic"] + f"<{self.music_dir.absolute()}>")
+            print(self.lang_code["addMusic"] + f"<{self.music_dir.absolute()}>")
             return 1
         else:
-            print(self.LANG_CODE["directoryAlready"])
+            print(self.lang_code["directoryAlready"])
             
     def convert_musics_to_mp3(self, files_completed_callback = None, files_quantity_callback = None ) -> int:
         if not self.music_dir.is_dir():
-            print(self.LANG_CODE["plsAdd"])
+            print(self.lang_code["plsAdd"])
 
         if len(os.listdir(self.music_dir)) == 0:
-            print(self.LANG_CODE["plsAdd"]) 
+            print(self.lang_code["plsAdd"]) 
             return 2
 
         if not self.out_dir.is_dir():
