@@ -1,6 +1,4 @@
 #!/bin/bash
-python -m venv .venv
-
 vpython=.venv/bin/python
 vpip=.venv/bin/pip
 firstTime=false
