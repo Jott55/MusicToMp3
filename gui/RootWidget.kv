@@ -1,0 +1,46 @@
+<RootWidget>
+    id: RootWidget
+    canvas:
+        Color:
+            rgba: (0.1, 0.1, 0.1, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        id: MainBox
+        orientation: 'vertical'
+        width: 200 * RootWidget.width / RootWidget.height
+        height: 200
+        pos: RootWidget.width / 2 - MainBox.width / 2, RootWidget.height / 2 - MainBox.height / 2
+        GridLayout:
+            id: ButtonGrid
+            width: 200 
+            height: 200 
+            rows: 2
+            cols: 2
+            Button:
+                id: button_add_music
+                text:"Add Musics"
+                width: 200
+                height: 100
+                on_release: RootWidget.add_music()
+            Button:
+                id: button_convert_music
+                text:"Convert"
+                width: 200
+                height: 100
+                on_release: RootWidget.convert_music()
+        GridLayout: 
+            rows: 4
+            ProgressBar:
+                id: convert_progress_bar
+                width: 100
+                height: 100
+            Label:
+                text: str(convert_progress_bar.value)
+            Label:
+                text: str(convert_progress_bar.max)
+            Button:
+                id: button_change_language
+                text: "Change cli language to portuguese"
+                on_release: RootWidget.toggle_application_language()
