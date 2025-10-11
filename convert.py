@@ -2,17 +2,20 @@ from pathlib import Path
 import os
 import subprocess
 
+LANG_CODE = {
+    "addMusic": "Add Musics to this directory and try again: ",
+    "plsAdd": "Please add musics in the diretory",
+    "musicDir": "songs",
+    "outDir": "out",
+    "directoryAlready": "Directory already created"
+}
+
 class MusicConvert():
     def __init__(self, lang = "en_US"):
-        LANG_CODE = {
-            "addMusic": "Add Musics to this directory and try again: ",
-            "plsAdd": "Please add musics in the diretory",
-            "musicDir": "songs",
-            "outDir": "out",
-            "directoryAlready": "Directory already created"
-        }
-
-        if (lang == "pt_BR"):
+        self.change_language(lang)
+        
+    def change_language(self, language = "en_US"):
+        if (language == "pt_BR"):
             LANG_CODE["addMusic"] = "Adicione mas musicas no diretorio e tente de novo: "
             LANG_CODE["plsAdd"] = "Por favor adicione as musicas no diretorio"
             LANG_CODE["musicDir"] = "musicas"
@@ -23,6 +26,7 @@ class MusicConvert():
 
         self.music_dir = Path(self.LANG_CODE["musicDir"])
         self.out_dir = Path(self.LANG_CODE["outDir"])
+
     def add_music_dir(self) -> int:
         if not self.music_dir.is_dir():
             os.mkdir(self.music_dir)
@@ -31,7 +35,6 @@ class MusicConvert():
         else:
             print(self.LANG_CODE["directoryAlready"])
             
-
     def convert_musics_to_mp3(self, files_completed_callback = None, files_quantity_callback = None ) -> int:
         if not self.music_dir.is_dir():
             print(self.LANG_CODE["plsAdd"])

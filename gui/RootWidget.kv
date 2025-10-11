@@ -29,7 +29,7 @@
                 height: 100
                 on_release: RootWidget.convert_music()
         GridLayout: 
-            rows: 3
+            rows: 4
             ProgressBar:
                 id: convert_progress_bar
                 width: 100
@@ -38,3 +38,6 @@
                 text: str(convert_progress_bar.value)
             Label:
                 text: str(convert_progress_bar.max)
+            Button:
+                text: "Change cli language to portuguese"
+                on_release: RootWidget.toggle_application_language()
