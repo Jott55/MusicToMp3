@@ -1,21 +1,40 @@
 <RootWidget>
+    id: RootWidget
     canvas:
         Color:
             rgba: (0.1, 0.1, 0.1, 1)
         Rectangle:
             pos: self.pos
             size: self.size
-    GridLayout:
-        rows: 2
-        pos: root.center
-        Button:
-            text:"Add Musics"
-            width: 200
-            height: 100
-            on_release: root.add_music() 
-        Button:
-            text:"Convert"
-            width: 200
-            height: 100
-            on_release: root.convert_music()
-        
+    BoxLayout:
+        id: MainBox
+        orientation: 'vertical'
+        width: 200 * RootWidget.width / RootWidget.height
+        height: 200
+        pos: RootWidget.width / 2 - MainBox.width / 2, RootWidget.height / 2 - MainBox.height / 2
+        GridLayout:
+            id: ButtonGrid
+            width: 200 
+            height: 200 
+            rows: 2
+            cols: 2
+            Button:
+                text:"Add Musics"
+                width: 200
+                height: 100
+                on_release: RootWidget.add_music()
+            Button:
+                text:"Convert"
+                width: 200
+                height: 100
+                on_release: RootWidget.convert_music()
+        GridLayout: 
+            rows: 3
+            ProgressBar:
+                id: convert_progress_bar
+                width: 100
+                height: 100
+            Label:
+                text: str(convert_progress_bar.max)
+            Label:
+                text: str(convert_progress_bar.value)
