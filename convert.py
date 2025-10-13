@@ -41,10 +41,10 @@ class MusicConvert():
         else:
             print(self.lang_code["directoryAlready"])
 
-    def add_options(self, options: str):
-        self.options += f" {options}"
+    def set_options(self, options: str):
+        self.options = options
 
-    def convert_musics_to_mp3(self, callback: dict = None) -> int:
+    def convert_musics_to_mp3(self, callback) -> int:
         if not self.music_dir.is_dir():
             self.add_music_dir()
 
@@ -52,7 +52,13 @@ class MusicConvert():
             print(self.lang_code["plsAdd"])
             return 1
 
+        files_quantity = 0
+        files_completed = 0
+
         for root, dirs, files in os.walk(self.music_dir):
+            if callback:
+                files_quantity += len(files)
+                callback(files_quantity, files_completed)
             for file in files:
                 relative_input_file_path = os.path.join(root, file)
                 relative_output_file_path = change_root_path(
@@ -63,44 +69,12 @@ class MusicConvert():
                 print(output_path_root)
              
                 os.makedirs(output_path_root, exist_ok=True)
-                convert(relative_input_file_path, relative_output_file_path)
+                convert(relative_input_file_path, relative_output_file_path, self.options)
+                if callback:
+                    files_completed += 1
+                    callback(files_quantity, files_completed)
 
         return 0
-                
-    # def convert_musics_to_mp3(self, files_completed_callback = None, files_quantity_callback = None ) -> int:
-    #     if not self.music_dir.is_dir():
-    #         print(self.lang_code["plsAdd"])
-
-    #     if len(os.listdir(self.music_dir)) == 0:
-    #         print(self.lang_code["plsAdd"]) 
-    #         return 2
-
-    #     if not self.out_dir.is_dir():
-    #         os.mkdir(self.out_dir)
-
-    #     options_verbose =  {
-    #         "no_overwrite": "-n"
-    #     }
-    #     options = ' '.join(options_verbose.values())
-        
-    #     files_completed = 0
-
-    #     for root, dirs, files in os.walk(self.music_dir):
-    #         if (files_quantity_callback):
-    #             files_quantity_callback(len(files))
-    #         for file in files:
-    #             extension_location = file.rfind('.')
-    #             if (extension_location != -1):
-    #                 output_file_name = file[:extension_location]
-    #             else: output_file_name = file
-    #             print(output_file_name)
-        
-    #             input_path = os.path.join(root, file)
-    #             print(f"ffmpeg -i '{input_path}' " + options + f" '{os.path.join(self.out_dir, output_file_name)}.mp3'")
-    #             subprocess.Popen(f"ffmpeg -i '{input_path}' " + options + f" '{os.path.join(self.out_dir, output_file_name)}.mp3'", shell=True).wait()
-    #             files_completed+=1
-    #             if files_completed_callback:
-    #                 files_completed_callback(files_completed)
 
 def change_root_path(relative_path: str, directory_name: str) -> str:
     end_point = relative_path.find('/')
