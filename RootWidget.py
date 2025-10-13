@@ -38,7 +38,7 @@ class RootWidget(Widget):
     def convert_music(self):
         self.set_progress_bar_value(0)
         def new_thread_conversion():
-            self.MusicConvert.convert_musics_to_mp3(self.set_progress_bar_value, self.set_progress_bar_max)
+            self.MusicConvert.convert_musics_to_mp3()
             subprocess.Popen(['xdg-open', Path.cwd().joinpath(self.MusicConvert.out_dir) ])
         threading.Thread(target=new_thread_conversion, daemon=True).start()
 
