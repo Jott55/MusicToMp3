@@ -1,3 +1,3 @@
 # Plannings for Future
 
-- [ ] simplify convert to be more flexible 
+- [x] simplify convert to be more flexible 
