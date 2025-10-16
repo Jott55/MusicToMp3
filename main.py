@@ -1,8 +1,8 @@
-from M2Mp3 import MainApp
+from M2Mp3 import M2Mp3
 from kivy.config import Config
 
 def start_kivy() -> None:
-    MainApp().run()
+    M2Mp3().run()
 
 def main() -> int:
 
